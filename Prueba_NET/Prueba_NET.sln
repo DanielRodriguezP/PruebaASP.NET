@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pueba_ASP.Data", "Pueba_ASP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pueba_ASP.Model", "Pueba_ASP.Model\Pueba_ASP.Model.csproj", "{0648B5DE-B05B-46AA-B168-1F72A9D4F7AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pueba_ASP.View", "Pueba_ASP.View\Pueba_ASP.View.csproj", "{40CD3644-E5A7-4BA3-AA98-966F8F4CAFA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba_ASP.Web", "Prueba_ASP.Web\Prueba_ASP.Web.csproj", "{4F360086-8E26-4C4E-9181-00AC6D310F2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,15 +23,16 @@ Global
 		{0648B5DE-B05B-46AA-B168-1F72A9D4F7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0648B5DE-B05B-46AA-B168-1F72A9D4F7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0648B5DE-B05B-46AA-B168-1F72A9D4F7AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40CD3644-E5A7-4BA3-AA98-966F8F4CAFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40CD3644-E5A7-4BA3-AA98-966F8F4CAFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40CD3644-E5A7-4BA3-AA98-966F8F4CAFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40CD3644-E5A7-4BA3-AA98-966F8F4CAFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F360086-8E26-4C4E-9181-00AC6D310F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F360086-8E26-4C4E-9181-00AC6D310F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F360086-8E26-4C4E-9181-00AC6D310F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F360086-8E26-4C4E-9181-00AC6D310F2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {FAA5D144-3793-4FF8-BC09-73C10C6AC493}
 	EndGlobalSection
 EndGlobal
