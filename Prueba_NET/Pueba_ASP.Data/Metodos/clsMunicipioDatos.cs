@@ -64,11 +64,12 @@ namespace Pueba_ASP.Data.Datos
             int resultado = datos.Ejecutar("USP_INSERTARMUNICIPIO");
             return resultado;
         }
-        public int actualizarMunicipio(int codigo, string nombre, bool estado) {
+        public int actualizarMunicipio(int codigo, string nombre, bool estado, int codigoR) {
             clsDatos datos = new clsDatos();
             datos.agregarParametro("@codigo", codigo);
             datos.agregarParametro("@nombre", nombre);
             datos.agregarParametro("@estado", estado);
+            datos.agregarParametro("@codigoR", codigoR);
             int resultado = datos.Ejecutar("USP_EDITARMUNICIPIO");
             return resultado;
         }

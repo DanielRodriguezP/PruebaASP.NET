@@ -1,138 +1,133 @@
 ﻿$(document).ready(function () {
-    //Ocultar notificacion y button
     $('#btnNotificacion').hide();
+    $('#codigo').hide();
     $('#btnActualizar').hide();
 
-    //Cargar tabla
+    //Metodo cargar tabla
     loadDataTable();
 
+    //Llenar combobox municipio
     $.ajax({
-        url: '/Municipio/listarRegion/',
+        url: '/Region/listarMunicipio/',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            var clasificacion = $("#cbxRegion");
+            var clasificacion = $("#cbxMunicipio");
             var datos = data.data;
             $(datos).each(function (i, v) {
-                clasificacion.append('<option value="' + v.CodigoR + '">' + v.Nombre + '</option>');
+                clasificacion.append('<option value="' + v.Codigo_Municipio + '">' + v.Nombre_Municipio + '</option>');
             });
         },
         error: function () {
             console.log('error');
         }
     });
-    //Cargar tabla
+
+    //Llenar datos la tabla
     function loadDataTable() {
 
         var table = $('#datatable').DataTable({
             "processing": true,
             "ajax": {
-                "url": '/Municipio/listar/',
+                "url": '/Region/listar/',
                 "type": "GET"
             },
             "columns": [
-                { "data": "Codigo_Municipio" },
-                { "data": "Nombre_Municipio" },
-                { "data": "Estado" },
-                { "data": "Codigo_Region" },
-                { "data": "Nombre_Region" },
+                { "data": "CodigoR" },
+                { "data": "Nombre" },
+                { "data": "CodigoM" },
+                { "data": "NombreM" },
                 { "defaultContent": " <button class='btn btn-info' id='btnEditar'><span class='glyphicon glyphicon-pencil'></span></button> <button class='btn btn-danger' id='btnEliminar'><span class='glyphicon  glyphicon-trash'></span></button>" }
             ]
         });
         GetData("#datatable", table);
     }
 
-    //caturar datos e imprimir en los input
+    //Capturar los datos de la fila e imprimmir en los input para editar
     function GetData(tbody, table) {
         $(tbody).on('click', '#btnEditar', function () {
             var objDatos = table.row($(this).parents('tr')).data();
-            $('#codigo').val(objDatos.Codigo_Municipio);
-            $('#municipio').val(objDatos.Nombre_Municipio);
-            $('#estado').val(objDatos.Estado);
-            $('#cbxRegion').val(objDatos.Codigo_Region);
+            $('#codigo').show();
+            $('#codigo').val(objDatos.CodigoR);
+            $('#region').val(objDatos.Nombre);
+            $('#cbxMunicipio').val(objDatos.CodigoM);
             $("#codigo").attr("readonly", "readonly");
             $('#btnActualizar').show();
             $('#btnGuardar').hide();
         });
 
-        //Actualizar informacion
         $('#btnActualizar').click(function () {
 
-            var resultado = validacionMunicipio();
+            var resultado = validacionRegion();
             if (resultado == false) {
                 return false;
             }
             //declarar objeto
             actualizarRegion = {};
-            actualizarRegion.Codigo_Municipio = $('#codigo').val();
-            actualizarRegion.Nombre_Municipio = $('#municipio').val();
-            actualizarRegion.Estado = $('#estado').attr('checked');
-                //$('#estado').val();
-            actualizarRegion.Codigo_region = $('#cbxRegion').val();
-            
+            actualizarRegion.CodigoR = $('#codigo').val();
+            actualizarRegion.Nombre = $('#region').val();
+            actualizarRegion.CodigoM = $('#cbxMunicipio').val();
+            //nuevoMunicipio.Municipio = $('#cbxRegion').val();
+            //nuevoProducto.IdTienda = $('#cbxTienda').val();
+
             $.ajax({
-                url: '/Municipio/Actualizar/',
+                url: '/Region/Actualizar/',
                 type: 'POST',
                 dataType: 'json',
                 data: actualizarRegion,
                 success: function (data) {
                     var result = data.data;
-                    var texto = "Se actualizo el registro";
-                        $('#lblmensaje').text(texto);
-                        $('#divmensaje').addClass('alert alert-success');
-                        $('#divmensaje').show();
-                        setTimeout(function () {
-                            $('#divmensaje').fadeOut(1000);
-                        }, 2000);
-                        $('#datatable').DataTable().ajax.reload();
-                        $('#codigo').val('');
-                    $('#municipio').val('');
-                    $('#estado').val('');
-                        $('#cbxRegion').val();
-                    $('#codigo').removeAttr("readonly");
-                    $('#btnActualizar').hide();
-                    $('#btnGuardar').show();
-                    $('#estado').attr('checked', false);
-                },
-                error: function () {
-                    var texto = "No se actualizo el registro";
+                    var texto = "Se actualizo correctamente";
                     $('#lblmensaje').text(texto);
-                    $('#divmensaje').addClass('alert alert-danger');
+                    $('#divmensaje').addClass('alert alert-success');
                     $('#divmensaje').show();
                     setTimeout(function () {
                         $('#divmensaje').fadeOut(1000);
                     }, 2000);
                     $('#datatable').DataTable().ajax.reload();
                     $('#codigo').val('');
-                    $('#municipio').val('');
-                    $('#estado').val('');
-                    $('#cbxRegion').val();
+                    $('#region').val('');
+                    $('#cbxMunicipio').val('');
                     $("#codigo").removeAttr("readonly");
                     $('#btnActualizar').hide();
                     $('#btnGuardar').show();
-                    $('#estado').attr('checked', false);
+                    $('#codigo').hide();
+                },
+                error: function () {
+                    var texto = "No se guardo el registro";
+                    $('#lblmensaje').text(texto);
+                    $('#divmensaje').addClass('alert alert-danger');
+                    $('#divmensaje').show();
+                    setTimeout(function () {
+                        $('#divmensaje').fadeOut(1000);
+                    }, 2000);
+
+                    $('#codigo').val('');
+                    $('#region').val('');
+                    $('#cbxMunicipio').val('');
+                    $("#codigo").removeAttr("readonly");
+                    $('#btnActualizar').hide();
+                    $('#btnGuardar').show();
                 }
             });
         });
 
-        //Eliminar informacion
         $(tbody).on('click', '#btnEliminar', function () {
             var objDatos = table.row($(this).parents('tr')).data();
             var datos = {};
-            datos.Codigo_region = objDatos.Codigo_Region;
-            datos.Codigo_Municipio = objDatos.Codigo_Municipio;
+            datos.CodigoR = objDatos.CodigoR;
+            datos.CodigoM = objDatos.CodigoM;
             $.ajax({
-                url: '/Municipio/EliminarMunicipio/',
+                url: '/Region/EliminarRegion/',
                 type: 'POST',
                 dataType: 'json',
                 data: datos,
                 success: function (data) {
                     var result = data.data;
-                    var texto = "Se Elimino el registro correctamente";
-                        $('#lblmensaje').text(texto);
+                    var texto = "Se elimino corretamente la informacion";
+                    $('#lblmensaje').text(texto);
                         $('#divmensaje').addClass('alert alert-success');
-                    $('#divmensaje').show();
-                    $('#divmensaje').focus();
+                        $('#divmensaje').show();
                         setTimeout(function () {
                             $('#divmensaje').fadeOut(1000);
                         }, 2000);
@@ -143,78 +138,66 @@
                     $('#lblmensaje').text(texto);
                     $('#divmensaje').addClass('alert alert-danger');
                     $('#divmensaje').show();
-                    $('#divmensaje').focus();
                     setTimeout(function () {
                         $('#divmensaje').fadeOut(1000);
                     }, 2000);
-                    $('#datatable').DataTable().ajax.reload();
                 }
             });
 
         });
     }
 
-    //Guardar informacion
     $('#btnGuardar').click(function () {
 
-        var resultado = validacionMunicipio();
-        if (resultado == false)
-        {
+        var resultado = validacionRegion();
+        if (resultado == false) {
             return false;
         }
         //declarar objeto
-        nuevoMunicipio = {};
-        nuevoMunicipio.Codigo_Municipio = $('#codigo').val();
-        nuevoMunicipio.Nombre_Municipio = $('#municipio').val();
-        nuevoMunicipio.Estado = $("#estado").is(":checked");
-            //$('#estado:checked').val();
-        nuevoMunicipio.Codigo_region = $('#cbxRegion').val();
+        nuevaRegion = {};
+        //nuevaRegion.CodigoR = $('#codigo').val();
+        nuevaRegion.Nombre = $('#region').val();
+        nuevaRegion.CodigoM = $('#cbxMunicipio').val();
+        //nuevoMunicipio.Municipio = $('#cbxRegion').val();
         //nuevoProducto.IdTienda = $('#cbxTienda').val();
 
         $.ajax({
-            url: '/Municipio/guardarMunicipio/',
+            url: '/Region/guardarRegion/',
             type: 'POST',
             dataType: 'json',
-            data: nuevoMunicipio,
+            data: nuevaRegion,
             success: function (data) {
                 var result = data.data;
-                var texto = "Se guardo el municipio correctamente";
+                var texto = "Se guardo region exitosamente";
                 $('#lblmensaje').text(texto);
-                $('#divmensaje').addClass('alert alert-success');
-                $('#divmensaje').show();
-                $('#divmensaje').focus();
-                setTimeout(function () {
-                    $('#divmensaje').fadeOut(1000);
-                }, 2000);
-                $('#datatable').DataTable().ajax.reload();
+                    $('#divmensaje').addClass('alert alert-success');
+                    $('#divmensaje').show();
+                    setTimeout(function () {
+                        $('#divmensaje').fadeOut(1000);
+                    }, 2000);
+                    $('#datatable').DataTable().ajax.reload();
                 $('#codigo').val('');
-                $('#municipio').val('');
-                $('#estado').val('');
-                 $('#cbxRegion').val();
-                $("#codigo").removeAttr("readonly");
-                $('#estado').attr('checked', false);
+                $('#region').val('');
+                $('#cbxMunicipio').val('');
             },
             error: function () {
                 var texto = "No se guardo el registro";
                 $('#lblmensaje').text(texto);
                 $('#divmensaje').addClass('alert alert-danger');
                 $('#divmensaje').show();
-                $('#divmensaje').focus();
                 setTimeout(function () {
                     $('#divmensaje').fadeOut(1000);
                 }, 2000);
+                $('#datatable').DataTable().ajax.reload();
                 $('#codigo').val('');
-                $('#municipio').val('');
-                $('#estado').val('');
-                $('#cbxRegion').val();
+                $('#region').val('');
+                $('#cbxMunicipio').val('');
                 $("#codigo").removeAttr("readonly");
-                $('#estado').attr('checked', false);
             }
         });
-    }); 
+    });
 
-    //Validaciones
-    function validacionMunicipio() {
+    function validacionRegion() {
         var Valido = false;
         if ($('#codigo').val().trim() == "") {
             $('#codigo').css('border-color', 'Red');
@@ -224,15 +207,14 @@
             $('#codigo').css('border-color', 'lightgrey');
             return true;
         }
-        if ($('#municipio').val().trim() == "") {
-            $('#municipio').css('border-color', 'Red');
+        if ($('#region').val().trim() == "") {
+            $('#region').css('border-color', 'Red');
             Valido = false;
         }
         else {
-            $('#municipio').css('border-color', 'lightgrey');
+            $('#region').css('border-color', 'lightgrey');
             return true;
         }
         return Valido;
     }
 });
-

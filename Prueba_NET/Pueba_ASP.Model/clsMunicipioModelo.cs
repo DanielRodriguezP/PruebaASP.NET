@@ -13,51 +13,33 @@ namespace Pueba_ASP.Model
     {
         public List<clsMunicipio> listar() {
 
-            clsMunicipio objMunicipio = new clsMunicipio();
-            clsMensajes mensaje = new clsMensajes();
             clsMunicipioDatos datos = new clsMunicipioDatos();
-            List<clsMunicipio> result = datos.listar();
-            try
-            {
-                if (result.Count > 0)
-                {
-                    objMunicipio.Mensaje = "Se listo el registro correctamente.";
-                }
-                else
-                {
-                    objMunicipio.Mensaje = "No se listo el registro correctamente.";
-                }
-            }
-            catch (Exception)
-            {
-               objMunicipio.Mensaje = "Error al realizar la consulta, comuníquese con el administrador.";
-            }
-           
-            return result;
+            return datos.listar();
         }
         public clsMunicipio listarPorId(int codigo) {
-                clsMunicipioDatos datos = new clsMunicipioDatos();
-                return datos.listarPorId(codigo);
+
+            clsMunicipioDatos datos = new clsMunicipioDatos();
+            return datos.listarPorId(codigo);
         }
         public List<clsRegion> listarRegion() {
+
             clsMunicipioDatos datos = new clsMunicipioDatos();
             return datos.listarRegion();
-
         }
         public bool guardarMunicipio(int codigo, string nombre, bool estado, int codigo_R) {
+
             clsMunicipioDatos datos = new clsMunicipioDatos();
-            clsMunicipio objMunicipio = new clsMunicipio();
-            clsMensajes mensaje = new clsMensajes();
             int resulado = datos.guardarMunicipio(codigo, nombre,estado,codigo_R);
-            if (resulado > 0) {
-                objMunicipio.Mensaje = "se guardo corectamente la informacion";
-                return true;
-            }
-            return false;
+            if (resulado > 0) return true;return false;
         }
-        public bool Actualizar(int codigo, string nombre, bool estado) {
+        public bool Actualizar(int codigo, string nombre, bool estado, int codigoR) {
             clsMunicipioDatos datos = new clsMunicipioDatos();
-            int resultado =  datos.actualizarMunicipio(codigo,nombre,estado);
+            int resultado =  datos.actualizarMunicipio(codigo,nombre,estado, codigoR);
+            if (resultado > 0) return true; return false;
+        }
+        public bool EliminarMunicipio(int codigo_r, int codigo_m) {
+            clsMunicipioDatos datos = new clsMunicipioDatos();
+            int resultado = datos.eliminarMunicipio(codigo_r,codigo_m);
             if (resultado > 0) return true; return false;
         }
     }

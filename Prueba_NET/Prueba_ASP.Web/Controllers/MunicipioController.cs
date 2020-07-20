@@ -11,34 +11,38 @@ namespace Prueba_ASP.Web.Controllers
 {
     public class MunicipioController : Controller
     {
-        clsMunicipioModelo obj = new clsMunicipioModelo();
+        clsMunicipioModelo objMunicipio = new clsMunicipioModelo();
         // GET: Municipio
         public ActionResult Index()
         {
            return View();
         }
+
         public JsonResult listar() {
-             return Json(obj.listar(), JsonRequestBehavior.AllowGet);
+            List<clsMunicipio> _list = objMunicipio.listar();
+            var result = _list.Select(x => new clsMunicipio
+            {
+                Codigo_Municipio = x.Codigo_Municipio,
+                Nombre_Municipio = x.Nombre_Municipio,
+                Estado = x.Estado,
+                Codigo_Region = x.Codigo_Region,
+                Nombre_Region = x.Nombre_Region
+            });
+            return Json(new { data = result}, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult consultarPorId(int codigo)
         {
-            clsMunicipioModelo objMunicipio = new clsMunicipioModelo();
             return Json(objMunicipio.listarPorId(codigo), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult guardarMunicipio(clsMunicipio municipio) {
-            //clsMunicipio datos = new clsMunicipio()
-            //{
-            //    Codigo_Municipio = municipio.Codigo_Municipio,
-            //    Nombre_Municipio = municipio.Nombre_Municipio,
-            //    Estado = municipio.Estado,
-            //    Codigo_Region = municipio.Codigo_Region,
-            //    Nombre_Region = municipio.Nombre_Region
-            //};
-            return Json(obj.guardarMunicipio(municipio.Codigo_Municipio, municipio.Nombre_Municipio, municipio.Estado, municipio.Codigo_Region), JsonRequestBehavior.AllowGet);
+
+        public ActionResult guardarMunicipio(clsMunicipio municipio) {
+
+            return Json(objMunicipio.guardarMunicipio(municipio.Codigo_Municipio, municipio.Nombre_Municipio, municipio.Estado, municipio.Codigo_Region), JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult listarRegion() {
-            clsMunicipioModelo obj = new clsMunicipioModelo();
-            List<clsRegion> _list = obj.listarRegion();
+            List<clsRegion> _list = objMunicipio.listarRegion();
             var result = _list.Select(x => new clsRegion
             {
                 CodigoR = x.CodigoR,
@@ -46,9 +50,16 @@ namespace Prueba_ASP.Web.Controllers
             });
             return Json(new { data = result }, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult Actualizar(clsMunicipio municipio)
         {
-            return Json(obj.Actualizar(municipio.Codigo_Municipio, municipio.Nombre_Municipio, municipio.Estado), JsonRequestBehavior.AllowGet);
+            return Json(objMunicipio.Actualizar(municipio.Codigo_Municipio, municipio.Nombre_Municipio, municipio.Estado, municipio.Codigo_Region), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EliminarMunicipio(clsMunicipio datos)
+        {
+            var result = objMunicipio.EliminarMunicipio(datos.Codigo_Region, datos.Codigo_Municipio);
+            return Json(new { data = result }, JsonRequestBehavior.AllowGet);
         }
     }
 }

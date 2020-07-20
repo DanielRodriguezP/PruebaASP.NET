@@ -6,25 +6,30 @@
 <div class="page-header text-center">
     <h3 class="text-center">Municipio</h3>
 </div>
+<div id="divmensaje" class="text-center" hidden>
+    <label id="lblmensaje"> </label>
+    <div class="text-center">
+        <button type="button" id="btnNotificacion">Aceptar</button>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3 col-sm-2">
         <div class="form-group">
             <label for="txtCodigo">Codigo</label>
-            <input type="text" id="codigo" name="txtCodigo" value="" class="form-control" />
+            <input type="text" id="codigo" name="txtCodigo" class="form-control" autofocus required />
         </div>
     </div>
     <div class="col-md-3 col-sm-2">
         <div class="form-group">
             <label for="txtMunicipio">Nombre</label>
-            <input type="text" id="municipio" name="txtMunicipio" value="" class="form-control" />
+            <input type="text" id="municipio" name="txtMunicipio" value="" class="form-control" required />
         </div>
     </div>
     <div class="col-md-3 col-sm-2">
         <div class="form-group">
             <label for="cbxRegion">Region</label>
-            <select id="cbxRegion" name="cbxRegion" class="form-control">
-                <option value="">--Seleccione una Region--</option>
-             </select>
+            <select id="cbxRegion" name="cbxRegion" class="form-control" required>
+            </select>
         </div>
     </div>
 </div>
@@ -32,15 +37,17 @@
     <div class="col-md-3 col-sm-2">
         <div class="form-group">
             <label for="estado">Estado</label>
-            <input type="radio" id="estado" name="estado" value="">
+            <input type="checkbox" id="estado" name="estado" value="true">
         </div>
     </div>
 </div>
 <div class="row">
     <input type="submit" class="btn btn-primary btn-block" id="btnGuardar" name="guardar_municipios" value="Guardar" />
- </div>
+    <input type="submit" class="btn btn-success btn-block" id="btnActualizar" name="actualizar_region" value="Actualizar" />
+</div>
+<br />
 <div class="row">
-    <table id="datatable" class="table table-striped table-condensed">
+    <table id="datatable" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>  Codigo </th>
@@ -51,7 +58,6 @@
                 <th>  Accion </th>
             </tr>
         </thead>
-        <tbody class="tbody"></tbody>
-    </table>
+     </table>
 </div>
 <script src="~/Scripts/Views/Municipio.js"></script>

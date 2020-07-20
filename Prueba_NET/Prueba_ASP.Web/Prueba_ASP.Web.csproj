@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MunicipioController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -149,7 +150,39 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Scripts\plugins\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Scripts\plugins\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Scripts\plugins\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_asc.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_both.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_desc.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.foundation.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.foundation.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.jqueryui.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.semanticui.js" />
+    <Content Include="Scripts\plugins\DataTables\js\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery-3.3.1.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\Views\Municipio.js" />
+    <Content Include="Scripts\Views\Region.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -165,6 +198,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Municipio\Index.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

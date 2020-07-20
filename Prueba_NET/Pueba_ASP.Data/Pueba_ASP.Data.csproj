@@ -51,11 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDatos.cs" />
-    <Compile Include="Entidad\clsCodigoMensajes.cs" />
-    <Compile Include="Entidad\clsMensajes.cs" />
     <Compile Include="Metodos\clsMunicipioDatos.cs" />
     <Compile Include="Entidad\clsMunicipio.cs" />
     <Compile Include="Entidad\clsRegion.cs" />
+    <Compile Include="Metodos\clsRegionDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
